@@ -48,7 +48,7 @@ ADP client library to get the logged-in user's info
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: Apache Software License License',
+        'License :: OSI Approved :: Apache Software License',
         'Natural Language :: English',
         'Operating System :: Unix',
         'Programming Language :: Python :: 2.7',
