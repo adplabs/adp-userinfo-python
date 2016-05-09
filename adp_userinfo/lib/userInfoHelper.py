@@ -21,6 +21,7 @@
 from adp_connection.lib.adpapiconnection import *
 from userinfoexceptions import *
 from userinfourlmap import *
+from adp_userinfo import __version__
 
 
 class UserInfoHelper(object):
@@ -35,6 +36,7 @@ class UserInfoHelper(object):
         and the api url map """
         self.adpapiconnection = connObj
         self.userInfoMap = userInfoURLMap()
+        self.userAgent = 'adp-userinfo-python/' + __version__
 
     def callAPI(self, apiuri):
         """ ADP API requester that makes the actual api calls and returns the
@@ -44,7 +46,7 @@ class UserInfoHelper(object):
         apiri: the actual API uri to be called
         Returns: response from the api GET request """
         connectionConfiguration = self.adpapiconnection.getConfig()
-        headers = {'Authorization': 'Bearer ' + self.adpapiconnection.getAccessToken()}
+        headers = {'Authorization': 'Bearer ' + self.adpapiconnection.getAccessToken(), 'user-agent': self.userAgent}
         r = requests.get(connectionConfiguration.getApiRequestURL() + apiuri,
                          cert=(connectionConfiguration.getSSLCertPath(),
                                connectionConfiguration.getSSLKeyPath()),

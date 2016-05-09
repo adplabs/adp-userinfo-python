@@ -26,11 +26,13 @@
     <link rel="top" title="ADP UserInfo Product Library 1.0.0 documentation" href="../../../index.html" />
     <link rel="up" title="Module code" href="../../index.html" />
    
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">  
+  <body role="document">
+  
 
     <div class="document">
       <div class="documentwrapper">
@@ -61,6 +63,7 @@
 <span class="kn">from</span> <span class="nn">adp_connection.lib.adpapiconnection</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">userinfoexceptions</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">userinfourlmap</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">adp_userinfo</span> <span class="kn">import</span> <span class="n">__version__</span>
 
 
 <div class="viewcode-block" id="UserInfoHelper"><a class="viewcode-back" href="../../../adp_userinfo.lib.html#adp_userinfo.lib.userInfoHelper.UserInfoHelper">[docs]</a><span class="k">class</span> <span class="nc">UserInfoHelper</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -75,6 +78,7 @@
 <span class="sd">        and the api url map &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">adpapiconnection</span> <span class="o">=</span> <span class="n">connObj</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">userInfoMap</span> <span class="o">=</span> <span class="n">userInfoURLMap</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">userAgent</span> <span class="o">=</span> <span class="s1">&#39;adp-userinfo-python/&#39;</span> <span class="o">+</span> <span class="n">__version__</span>
 
 <div class="viewcode-block" id="UserInfoHelper.callAPI"><a class="viewcode-back" href="../../../adp_userinfo.lib.html#adp_userinfo.lib.userInfoHelper.UserInfoHelper.callAPI">[docs]</a>    <span class="k">def</span> <span class="nf">callAPI</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">apiuri</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; ADP API requester that makes the actual api calls and returns the</span>
@@ -84,7 +88,7 @@
 <span class="sd">        apiri: the actual API uri to be called</span>
 <span class="sd">        Returns: response from the api GET request &quot;&quot;&quot;</span>
         <span class="n">connectionConfiguration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adpapiconnection</span><span class="o">.</span><span class="n">getConfig</span><span class="p">()</span>
-        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="s1">&#39;Bearer &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">adpapiconnection</span><span class="o">.</span><span class="n">getAccessToken</span><span class="p">()}</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="s1">&#39;Bearer &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">adpapiconnection</span><span class="o">.</span><span class="n">getAccessToken</span><span class="p">(),</span> <span class="s1">&#39;user-agent&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">userAgent</span><span class="p">}</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">connectionConfiguration</span><span class="o">.</span><span class="n">getApiRequestURL</span><span class="p">()</span> <span class="o">+</span> <span class="n">apiuri</span><span class="p">,</span>
                          <span class="n">cert</span><span class="o">=</span><span class="p">(</span><span class="n">connectionConfiguration</span><span class="o">.</span><span class="n">getSSLCertPath</span><span class="p">(),</span>
                                <span class="n">connectionConfiguration</span><span class="o">.</span><span class="n">getSSLKeyPath</span><span class="p">()),</span>
@@ -129,9 +133,6 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -142,8 +143,8 @@
       &copy;2016, ADP, LLC..
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
       
     </div>
 
